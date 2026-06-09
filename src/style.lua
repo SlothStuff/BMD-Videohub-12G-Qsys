@@ -3,39 +3,42 @@
 -- Change values here to restyle the entire plugin UI.
 
 STYLE = {
-  -- Canvas backgrounds
-  BgPlugin  = { 40,  40,  40  },
-  BgSection = { 50,  50,  50  },
-  BgDark    = { 30,  30,  30  },
-  BgField   = { 60,  60,  60  },
+  -- Canvas backgrounds (dark navy, matching Sweetwater reference palette)
+  BgPlugin  = { 12,  14,  16  },
+  BgSection = { 22,  25,  29  },
+  BgDark    = { 12,  14,  16  },
+  BgField   = { 32,  37,  43  },
 
   -- Borders
-  Stroke        = { 80,  80,  80  },
-  StrokeAccent  = { 0,   134, 214 },
+  Stroke        = { 66,  76,  88  },
+  StrokeAccent  = { 22,  102, 128 },
 
   -- Text
-  FgTitle  = { 200, 200, 200 },
-  FgLabel  = { 180, 180, 180 },
-  FgDim    = { 120, 120, 120 },
+  FgTitle  = { 235, 240, 244 },
+  FgLabel  = { 218, 224, 230 },
+  FgDim    = { 175, 185, 194 },
 
   -- Buttons
-  BtnOn    = { 0,   134, 214 },
-  BtnOff   = { 70,  70,  70  },
-  BtnDanger= { 200, 50,  50  },
+  BtnOn    = { 22,  102, 128 },
+  BtnOff   = { 52,  58,  66  },
+  BtnDanger= { 135, 42,  42  },
 
   -- Status indicators
-  StatusOk    = { 0,   180, 0   },
-  StatusWarn  = { 220, 160, 0   },
-  StatusFault = { 200, 50,  50  },
-  StatusOff   = { 80,  80,  80  },
+  StatusOk    = { 24,  120, 75  },
+  StatusWarn  = { 154, 118, 30  },
+  StatusFault = { 135, 42,  42  },
+  StatusOff   = { 66,  76,  88  },
 
   -- Meter / bar fills
-  MeterLow  = { 0,   180, 0   },
-  MeterMid  = { 220, 160, 0   },
-  MeterHigh = { 200, 50,  50  },
+  MeterLow  = { 24,  120, 75  },
+  MeterMid  = { 154, 118, 30  },
+  MeterHigh = { 135, 42,  42  },
 
-  -- Accent (brand color)
-  Accent = { 0, 134, 214 },
+  -- Accent (teal brand color)
+  Accent = { 22, 102, 128 },
+
+  -- Warning banner color (amber)
+  Warning = { 220, 160, 30 },
 
   -- Corner radii (minimum values; increase per design)
   RadiusBtn   = 5,  -- all buttons

@@ -21,12 +21,32 @@ table.insert(graphics, {
   Color        = STYLE.FgTitle
 })
 
--- Connection status indicator (top-right of header)
-layout["ConnectionStatus"] = {
-  PrettyName = "Status~Connection",
-  Style      = "Status",
-  Position   = { LAYOUT.W - LAYOUT.Margin - 24, LAYOUT.Margin + 4 },
-  Size       = { 20, 20 }
+-- Abbreviated connection status (top-right of header)
+layout["ConnStatusShort"] = {
+  PrettyName  = "Status~Connection",
+  Style       = "Text",
+  IsReadOnly  = true,
+  Position    = { LAYOUT.W - LAYOUT.Margin - 26, LAYOUT.Margin + 4 },
+  Size        = { 22, 20 },
+  Color       = STYLE.BgSection,
+  TextColor   = STYLE.FgLabel,
+  FontSize    = 8,
+  IsBold      = true,
+  HTextAlign  = "Center"
+}
+
+-- Model mismatch warning banner (transparent overlay, amber text, centered in header)
+layout["ModelMismatch"] = {
+  PrettyName  = "Status~Model Mismatch",
+  Style       = "Text",
+  IsReadOnly  = true,
+  Position    = { LAYOUT.Margin + 4, LAYOUT.Margin + 4 },
+  Size        = { LAYOUT.W - LAYOUT.Margin * 2 - 36, 20 },
+  Color       = { 255, 255, 255, 0 },
+  TextColor   = STYLE.Warning,
+  FontSize    = 9,
+  IsBold      = true,
+  HTextAlign  = "Center"
 }
 
 -- Page title label (shown when outputs span multiple banks)
@@ -84,14 +104,14 @@ table.insert(graphics, {
 })
 
 table.insert(graphics, {
-  Type       = "Label", Text = "IN",
+  Type       = "Label", Text = "IN #",
   Position   = { colIn, yColHeader }, Size = { colInW, LAYOUT.RowH },
   FontSize   = headerLabelStyle.FontSize, IsBold = headerLabelStyle.IsBold,
   Color      = headerLabelStyle.Color,   HTextAlign = headerLabelStyle.HTextAlign
 })
 
 table.insert(graphics, {
-  Type       = "Label", Text = "Input Name",
+  Type       = "Label", Text = "Input",
   Position   = { colName, yColHeader }, Size = { colNameW, LAYOUT.RowH },
   FontSize   = headerLabelStyle.FontSize, IsBold = headerLabelStyle.IsBold,
   Color      = headerLabelStyle.Color,   HTextAlign = headerLabelStyle.HTextAlign
@@ -110,7 +130,6 @@ end
 -- Routing rows
 -- ─────────────────────────────────────────────
 local yRowBase = LAYOUT.HeaderH + 4 + LAYOUT.RowH + 4
-local routingStyle = (inputCount <= 20) and "ComboBox" or "Text"
 
 for i = bankStart, bankEnd do
   local rowIndex = i - bankStart
@@ -124,7 +143,7 @@ for i = bankStart, bankEnd do
     Size       = { colNumW, LAYOUT.RowH },
     Color      = STYLE.FgDim,
     FontSize   = 10,
-    HTextAlign = "Right"
+    HTextAlign = "Center"
   })
 
   -- 2. Output Label N (read-only text)
@@ -136,19 +155,18 @@ for i = bankStart, bankEnd do
     Size       = { colOutW, LAYOUT.RowH }
   }
 
-  -- 3. Output Routing N (ComboBox or Text)
+  -- 3. Output Routing N (always plain text — user types input number)
   layout["Output Routing " .. i] = {
     PrettyName = "Routing~Output " .. i,
-    Style      = routingStyle,
+    Style      = "Text",
     Position   = { colIn, y },
     Size       = { colInW, LAYOUT.RowH }
   }
 
-  -- 4. Route Display N (read-only text)
+  -- 4. Route Display N (ComboBox — select input by label name)
   layout["Route Display " .. i] = {
-    PrettyName = "Routing~Output " .. i .. " Input Name",
-    Style      = "Text",
-    IsReadOnly = true,
+    PrettyName = "Routing~Output " .. i .. " Input",
+    Style      = "ComboBox",
     Position   = { colName, y },
     Size       = { colNameW, LAYOUT.RowH }
   }
@@ -161,8 +179,8 @@ for i = bankStart, bankEnd do
     local ledY   = y + math.floor((LAYOUT.RowH - ledH) / 2)
     local btnH   = 20
     local btnY   = y + math.floor((LAYOUT.RowH - btnH) / 2)
-    local lockBtnW   = 28
-    local unlockBtnW = 36
+    local lockBtnW   = 38
+    local unlockBtnW = 50
     local gap    = 2
 
     -- LED indicator

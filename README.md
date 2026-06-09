@@ -91,7 +91,7 @@ Text-based, `\n\n`-delimited blocks. No authentication required.
 
 ## Debug Workflow
 
-1. Build the debug plugin: `.\build\compile.ps1 -Version "0.1.0" -DebugBuild`
+1. Build the debug plugin: `.\build\compile-debug.ps1 -Version "0.1.0"`
 2. Install the resulting `.qplug` from `dist/`.
 3. Add a **Control Script** alongside the plugin in your design.
 4. Paste your runtime code from `src/runtime/` into the Control Script.
@@ -127,4 +127,4 @@ Output is written to `dist/v{version}-{date}/`.
 
 | Version | Date | Notes |
 |---------|------|-------|
-| 0.1.0 | 06/2026 | Initial release |
+| 0.1.0 | 06/2026 | Initial release — all models Mini 4x2 through 80x80, presets, labels, optional take/lock |

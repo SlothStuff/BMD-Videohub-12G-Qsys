@@ -27,6 +27,17 @@ function GetControlLayout(props)
     CornerRadius = 0
   })
 
+  -- Attribution (bottom-right corner, matching reference plugin style)
+  table.insert(graphics, {
+    Type       = "Label",
+    Text       = "Designed by Sweetwater Integration",
+    Position   = { LAYOUT.W - 220, LAYOUT.H - 18 },
+    Size       = { 216, 14 },
+    Color      = STYLE.FgDim,
+    FontSize   = 8,
+    HTextAlign = "Right"
+  })
+
   -- Determine routing bank range (used by page_control.lua)
   local bankStart, bankEnd
   if CurrentPage == "Control" then

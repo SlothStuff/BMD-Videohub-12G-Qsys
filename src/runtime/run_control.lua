@@ -3,12 +3,21 @@
 -- caches (set in handlers.lua before the control string is updated) so that device-initiated
 -- updates don't loop back as new commands.
 
--- Detect I/O counts from instantiated controls (avoids needing MODEL_IO at runtime)
+-- Detect I/O counts from instantiated controls (avoids needing MODEL_IO at runtime).
+-- Q-SYS Count > 1 controls are accessed as Controls["Name"][i], not Controls["Name i"].
 local outputCount = 0
 local inputCount  = 0
-for i = 1, 80 do
-  if Controls["Output Routing " .. i] then outputCount = i end
-  if Controls["Input Label "   .. i]  then inputCount  = i end
+local _outCtrl = Controls["Output Routing"]
+local _inCtrl  = Controls["Input Label"]
+if _outCtrl then
+  for i = 1, 130 do
+    if _outCtrl[i] then outputCount = i end
+  end
+end
+if _inCtrl then
+  for i = 1, 130 do
+    if _inCtrl[i] then inputCount = i end
+  end
 end
 
 local useTake     = Properties["Use Take"].Value
@@ -26,7 +35,7 @@ end
 
 for i = 1, outputCount do
   local idx = i
-  Controls["Output Routing " .. idx].EventHandler = function(ctrl)
+  Controls["Output Routing"][idx].EventHandler = function(ctrl)
     local input1 = tonumber(ctrl.String)
     if not input1 or input1 < 1 then return end
     -- Suppress echo: HandleRouting sets CurrentRoutes[n] before updating the control
@@ -36,6 +45,33 @@ for i = 1, outputCount do
       UpdateTakePending()
     else
       RouteOutput(idx, input1)
+    end
+  end
+end
+
+-- Route Display ComboBox: selecting a label name routes by name lookup
+for i = 1, outputCount do
+  local idx  = i
+  local disp = Controls["Route Display"][idx]
+  if disp then
+    disp.EventHandler = function(c)
+      local choices = Controls["Route Display"][idx].Choices
+      if not choices then return end
+      local input1
+      for k, label in ipairs(choices) do
+        if label == c.String then
+          input1 = k
+          break
+        end
+      end
+      if not input1 then return end
+      if input1 == CurrentRoutes[idx] then return end
+      if useTake then
+        StagedRoutes[idx] = input1
+        UpdateTakePending()
+      else
+        RouteOutput(idx, input1)
+      end
     end
   end
 end
@@ -61,8 +97,8 @@ end
 if lockEnabled then
   for i = 1, outputCount do
     local idx = i
-    local lockBtn   = Controls["Lock Output "   .. idx]
-    local unlockBtn = Controls["Unlock Output " .. idx]
+    local lockBtn   = Controls["Lock Output"][idx]
+    local unlockBtn = Controls["Unlock Output"][idx]
     if lockBtn   then lockBtn.EventHandler   = function() LockOutput(idx)   end end
     if unlockBtn then unlockBtn.EventHandler = function() UnlockOutput(idx) end end
   end
@@ -74,7 +110,7 @@ end
 
 for i = 1, inputCount do
   local idx  = i
-  local ctrl = Controls["Input Label " .. idx]
+  local ctrl = Controls["Input Label"][idx]
   if ctrl then
     ctrl.EventHandler = function(c)
       -- Suppress echo: HandleInputLabels sets InputLabels[n] before updating the control
@@ -86,7 +122,7 @@ end
 
 for i = 1, outputCount do
   local idx  = i
-  local ctrl = Controls["Output Label " .. idx]
+  local ctrl = Controls["Output Label"][idx]
   if ctrl then
     ctrl.EventHandler = function(c)
       -- Suppress echo: HandleOutputLabels sets OutputLabels[n] before updating the control
@@ -115,7 +151,7 @@ end
 for i = 1, 8 do
   local idx = i
 
-  Controls["Preset Save " .. idx].EventHandler = function()
+  Controls["Preset Save"][idx].EventHandler = function()
     -- Serialize only confirmed routes; skip outputs not yet reported by device
     local entries = {}
     for j = 1, outputCount do
@@ -123,12 +159,12 @@ for i = 1, 8 do
         entries[#entries + 1] = j .. "=" .. CurrentRoutes[j]
       end
     end
-    Controls["Preset Data " .. idx].String = table.concat(entries, ",")
+    Controls["Preset Data"][idx].String = table.concat(entries, ",")
     print(string.format("[PRESET] Saved preset %d (%d/%d outputs confirmed)", idx, #entries, outputCount))
   end
 
-  Controls["Preset Load " .. idx].EventHandler = function()
-    local data = Controls["Preset Data " .. idx].String
+  Controls["Preset Load"][idx].EventHandler = function()
+    local data = Controls["Preset Data"][idx].String
     if data == "" then
       print(string.format("[PRESET] Preset %d is empty", idx))
       return

@@ -12,9 +12,30 @@ table.insert(graphics, {
   CornerRadius=STYLE.RadiusBox, Font="Roboto", FontSize=10, IsBold=true, Color=STYLE.FgTitle
 })
 
-layout["ConnectionStatus"] = {
-  PrettyName="Status~Connection", Style="Status",
-  Position={LAYOUT.W - LAYOUT.Margin - 24, LAYOUT.Margin + 4}, Size={20, 20}
+layout["ConnStatusShort"] = {
+  PrettyName  = "Status~Connection",
+  Style       = "Text",
+  IsReadOnly  = true,
+  Position    = { LAYOUT.W - LAYOUT.Margin - 26, LAYOUT.Margin + 4 },
+  Size        = { 22, 20 },
+  Color       = STYLE.BgSection,
+  TextColor   = STYLE.FgLabel,
+  FontSize    = 8,
+  IsBold      = true,
+  HTextAlign  = "Center"
+}
+
+layout["ModelMismatch"] = {
+  PrettyName  = "Status~Model Mismatch",
+  Style       = "Text",
+  IsReadOnly  = true,
+  Position    = { LAYOUT.Margin + 4, LAYOUT.Margin + 4 },
+  Size        = { LAYOUT.W - LAYOUT.Margin * 2 - 36, 20 },
+  Color       = { 255, 255, 255, 0 },
+  TextColor   = STYLE.Warning,
+  FontSize    = 9,
+  IsBold      = true,
+  HTextAlign  = "Center"
 }
 
 local bankRows  = labelBankEnd - labelBankStart + 1
@@ -36,6 +57,21 @@ table.insert(graphics, {
   Fill=STYLE.BgSection, StrokeColor=STYLE.Stroke, StrokeWidth=1,
   CornerRadius=STYLE.RadiusBox, Font="Roboto", FontSize=10, IsBold=true, Color=STYLE.FgTitle
 })
+
+-- Disclaimer shown only when label editing is enabled
+if labelEdit then
+  local disclaimerY = colBoxY + colBoxH + 6
+  table.insert(graphics, {
+    Type       = "Label",
+    Text       = "\xe2\x9a\xa0  Changes to labels are written directly to the Videohub device.",
+    Position   = { LAYOUT.Margin, disclaimerY },
+    Size       = { LAYOUT.W - LAYOUT.Margin * 2, 14 },
+    Color      = STYLE.Warning,
+    FontSize   = 9,
+    IsBold     = false,
+    HTextAlign = "Center"
+  })
+end
 
 for i = labelBankStart, labelBankEnd do
   local rowY = colBoxY + 24 + (i - labelBankStart) * 28

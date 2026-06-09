@@ -9,12 +9,33 @@ table.insert(graphics, {
   CornerRadius=STYLE.RadiusBox, Font="Roboto", FontSize=10, IsBold=true, Color=STYLE.FgTitle
 })
 
-layout["ConnectionStatus"] = {
-  PrettyName="Status~Connection", Style="Status",
-  Position={LAYOUT.W - LAYOUT.Margin - 24, LAYOUT.Margin + 4}, Size={20, 20}
+layout["ConnStatusShort"] = {
+  PrettyName  = "Status~Connection",
+  Style       = "Text",
+  IsReadOnly  = true,
+  Position    = { LAYOUT.W - LAYOUT.Margin - 26, LAYOUT.Margin + 4 },
+  Size        = { 22, 20 },
+  Color       = STYLE.BgSection,
+  TextColor   = STYLE.FgLabel,
+  FontSize    = 8,
+  IsBold      = true,
+  HTextAlign  = "Center"
 }
 
-local presetsBoxH = 8 * 38 + 16
+layout["ModelMismatch"] = {
+  PrettyName  = "Status~Model Mismatch",
+  Style       = "Text",
+  IsReadOnly  = true,
+  Position    = { LAYOUT.Margin + 4, LAYOUT.Margin + 4 },
+  Size        = { LAYOUT.W - LAYOUT.Margin * 2 - 36, 20 },
+  Color       = { 255, 255, 255, 0 },
+  TextColor   = STYLE.Warning,
+  FontSize    = 9,
+  IsBold      = true,
+  HTextAlign  = "Center"
+}
+
+local presetsBoxH = 8 * 38 + 24
 table.insert(graphics, {
   Type="GroupBox", Text="Presets",
   Position={LAYOUT.Margin, LAYOUT.HeaderH + 4},
@@ -24,7 +45,7 @@ table.insert(graphics, {
 })
 
 for i = 1, 8 do
-  local rowY = LAYOUT.HeaderH + 4 + 8 + (i - 1) * 38
+  local rowY = LAYOUT.HeaderH + 4 + 16 + (i - 1) * 38
 
   table.insert(graphics, {
     Type="Label", Text=tostring(i),

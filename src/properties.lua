@@ -14,6 +14,7 @@ function GetProperties()
       "Videohub 20x20 12G",
       "Videohub 40x40 12G",
       "Videohub 80x80 12G",
+      "Videohub 120x120 12G",
     },
     Value = "Videohub 20x20 12G",
   })

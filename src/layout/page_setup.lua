@@ -19,13 +19,27 @@ table.insert(graphics, {
   Color        = STYLE.FgTitle
 })
 
--- ConnectionStatus (top-right, shared position across all pages)
+-- ConnectionStatus (top-right, full-text status — kept as-is per user preference)
 layout["ConnectionStatus"] = {
   PrettyName = "Status~Connection Status",
   Style      = "Text",
   IsReadOnly = true,
   Position   = { LAYOUT.W - LAYOUT.Margin - LAYOUT.FieldW, LAYOUT.Margin + 4 },
   Size       = { LAYOUT.FieldW, LAYOUT.ControlH }
+}
+
+-- Model mismatch warning banner (transparent overlay, amber text, centered in header)
+layout["ModelMismatch"] = {
+  PrettyName  = "Status~Model Mismatch",
+  Style       = "Text",
+  IsReadOnly  = true,
+  Position    = { LAYOUT.Margin + 4, LAYOUT.Margin + 4 },
+  Size        = { LAYOUT.W - LAYOUT.Margin * 2 - LAYOUT.FieldW - 12, 20 },
+  Color       = { 255, 255, 255, 0 },
+  TextColor   = STYLE.Warning,
+  FontSize    = 9,
+  IsBold      = true,
+  HTextAlign  = "Center"
 }
 
 -- Settings GroupBox
@@ -78,6 +92,7 @@ table.insert(graphics, {
 layout["Port"] = {
   PrettyName = "Setup~Port",
   Style      = "Text",
+  IsReadOnly = true,
   Position   = { LAYOUT.Col2, y },
   Size       = { 80, LAYOUT.ControlH }
 }

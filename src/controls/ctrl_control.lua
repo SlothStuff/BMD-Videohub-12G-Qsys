@@ -10,7 +10,8 @@ local MODEL_IO = {
   ["Videohub 10x10 12G"]     = { inputs = 10, outputs = 10 },
   ["Videohub 20x20 12G"]     = { inputs = 20, outputs = 20 },
   ["Videohub 40x40 12G"]     = { inputs = 40, outputs = 40 },
-  ["Videohub 80x80 12G"]     = { inputs = 80, outputs = 80 },
+  ["Videohub 80x80 12G"]     = { inputs = 80,  outputs = 80  },
+  ["Videohub 120x120 12G"]   = { inputs = 120, outputs = 120 },
 }
 local modelKey    = props["Videohub Model"].Value
 local modelIO     = MODEL_IO[modelKey] or MODEL_IO["Videohub 20x20 12G"]
@@ -50,7 +51,7 @@ table.insert(ctrls, {
   Name        = "Port",
   ControlType = "Text",
   UserPin     = true,
-  PinStyle    = "Both",
+  PinStyle    = "Output",
   Count       = 1,
 })
 
@@ -72,38 +73,23 @@ table.insert(ctrls, {
 })
 
 -- ─── Routing ──────────────────────────────────────────────────────────────────
-if inputCount <= 20 then
-  local choices = {}
-  for i = 1, inputCount do
-    choices[#choices + 1] = tostring(i)
-  end
-  table.insert(ctrls, {
-    Name        = "Output Routing",
-    ControlType = "Text",
-    TextBoxType = "ComboBox",
-    Choices     = choices,
-    UserPin     = true,
-    PinStyle    = "Both",
-    Count       = outputCount,
-  })
-else
-  table.insert(ctrls, {
-    Name        = "Output Routing",
-    ControlType = "Text",
-    UserPin     = true,
-    PinStyle    = "Both",
-    Count       = outputCount,
-  })
-end
+table.insert(ctrls, {
+  Name        = "Output Routing",
+  ControlType = "Text",
+  UserPin     = true,
+  PinStyle    = "Both",
+  Count       = outputCount,
+})
 
--- Count > 1 access rule: Controls["Output Routing 1"] .. Controls["Output Routing N"]
--- NOT Controls["Output Routing"] — that key does not exist for Count > 1 controls.
+-- Count > 1 access rule: Controls["Output Routing"][1] .. Controls["Output Routing"][N]
+-- NOT Controls["Output Routing 1"] — that string-key form is nil in the Q-SYS runtime.
 -- Same applies to Route Display, Input Label, Output Label, Lock/Unlock Output, etc.
 
--- Hidden display controls that show input label names in the UI
+-- ComboBox showing input label names; selecting routes that output by name
 table.insert(ctrls, {
   Name        = "Route Display",
   ControlType = "Text",
+  TextBoxType = "ComboBox",
   UserPin     = false,
   PinStyle    = "None",
   Count       = outputCount,
@@ -211,6 +197,25 @@ table.insert(ctrls, {
   UserPin     = false,
   PinStyle    = "None",
   Count       = 8,
+})
+
+-- ─── Status display ───────────────────────────────────────────────────────────
+-- Transparent banner in page header; set by runtime when model ≠ device I/O
+table.insert(ctrls, {
+  Name        = "ModelMismatch",
+  ControlType = "Text",
+  UserPin     = false,
+  PinStyle    = "None",
+  Count       = 1,
+})
+
+-- Abbreviated connection status for the small 20×20 indicator on routing/presets/labels pages
+table.insert(ctrls, {
+  Name        = "ConnStatusShort",
+  ControlType = "Text",
+  UserPin     = false,
+  PinStyle    = "None",
+  Count       = 1,
 })
 
 -- ─── Diagnostics ──────────────────────────────────────────────────────────────

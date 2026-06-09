@@ -19,12 +19,26 @@ table.insert(graphics, {
   Color        = STYLE.FgTitle
 })
 
--- Logo (shown only when LogoImage contains base64 PNG data)
+-- Model mismatch warning banner
+layout["ModelMismatch"] = {
+  PrettyName  = "Status~Model Mismatch",
+  Style       = "Text",
+  IsReadOnly  = true,
+  Position    = { LAYOUT.Margin + 4, LAYOUT.Margin + 4 },
+  Size        = { LAYOUT.W - LAYOUT.Margin * 2 - 8, 14 },
+  Color       = { 255, 255, 255, 0 },
+  TextColor   = STYLE.Warning,
+  FontSize    = 9,
+  IsBold      = true,
+  HTextAlign  = "Center"
+}
+
+-- Logo (centered horizontally; shown only when LogoImage contains base64 PNG data)
 if LogoImage ~= "" then
   table.insert(graphics, {
     Type     = "Image",
     Image    = LogoImage,
-    Position = { LAYOUT.Margin + 4, LAYOUT.Margin + 18 },
+    Position = { math.floor((LAYOUT.W - 200) / 2), LAYOUT.Margin + 18 },
     Size     = { 200, 50 }
   })
 end

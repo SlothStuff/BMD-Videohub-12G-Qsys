@@ -8,7 +8,8 @@ MODEL_IO = {
   ["Videohub 10x10 12G"]     = { inputs = 10, outputs = 10 },
   ["Videohub 20x20 12G"]     = { inputs = 20, outputs = 20 },
   ["Videohub 40x40 12G"]     = { inputs = 40, outputs = 40 },
-  ["Videohub 80x80 12G"]     = { inputs = 80, outputs = 80 },
+  ["Videohub 80x80 12G"]     = { inputs = 80,  outputs = 80  },
+  ["Videohub 120x120 12G"]   = { inputs = 120, outputs = 120 },
 }
 BANK_SIZE = 20  -- rows per routing or labels page
 
