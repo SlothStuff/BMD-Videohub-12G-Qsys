@@ -16,16 +16,25 @@ function GetControlLayout(props)
   local useTake     = props["Use Take"].Value
   local labelEdit   = props["Allow Label Editing"].Value
 
-  -- Full-canvas background
-  table.insert(graphics, {
-    Type         = "GroupBox",
-    Position     = { 0, 0 },
-    Size         = { LAYOUT.W, LAYOUT.H },
-    Fill         = STYLE.BgPlugin,
-    StrokeColor  = STYLE.BgPlugin,
-    StrokeWidth  = 0,
-    CornerRadius = 0
-  })
+  -- Full-canvas background (image when available, solid fill as fallback)
+  if PluginBackgroundImage ~= "" then
+    table.insert(graphics, {
+      Type     = "Image",
+      Image    = PluginBackgroundImage,
+      Position = { 0, 0 },
+      Size     = { LAYOUT.W, LAYOUT.H }
+    })
+  else
+    table.insert(graphics, {
+      Type         = "GroupBox",
+      Position     = { 0, 0 },
+      Size         = { LAYOUT.W, LAYOUT.H },
+      Fill         = STYLE.BgPlugin,
+      StrokeColor  = STYLE.BgPlugin,
+      StrokeWidth  = 0,
+      CornerRadius = 0
+    })
+  end
 
   -- Attribution (bottom-right corner, matching reference plugin style)
   table.insert(graphics, {
