@@ -24,12 +24,13 @@ layout["ModelMismatch"] = {
   PrettyName  = "Status~Model Mismatch",
   Style       = "Text",
   IsReadOnly  = true,
-  Position    = { LAYOUT.Margin + 4, LAYOUT.Margin + 15 },
+  Position    = { LAYOUT.Margin + 4, LAYOUT.Margin + 20 },
   Size        = { LAYOUT.W - LAYOUT.Margin * 2 - 8, 14 },
   Color       = { 255, 255, 255, 0 },
   TextColor   = STYLE.Warning,
   FontSize    = 9,
   IsBold      = true,
+  StrokeWidth = 0,
   HTextAlign  = "Center"
 }
 
@@ -38,7 +39,7 @@ if LogoImage ~= "" then
   table.insert(graphics, {
     Type     = "Image",
     Image    = LogoImage,
-    Position = { math.floor((LAYOUT.W - 200) / 2), LAYOUT.Margin + 18 },
+    Position = { math.floor((LAYOUT.W - 200) / 2), LAYOUT.Margin + 50 },
     Size     = { 200, 50 }
   })
 end
@@ -47,7 +48,7 @@ end
 table.insert(graphics, {
   Type       = "Label",
   Text       = "v" .. PluginInfo.Version,
-  Position   = { LAYOUT.W - 80, LAYOUT.Margin + 18 },
+  Position   = { LAYOUT.W - 80, LAYOUT.Margin + 20 },
   Size       = { 66, 16 },
   Color      = STYLE.FgDim,
   FontSize   = 9,
@@ -58,7 +59,7 @@ table.insert(graphics, {
 table.insert(graphics, {
   Type       = "Label",
   Text       = PluginInfo.Description,
-  Position   = { LAYOUT.Margin + 4, LAYOUT.Margin + 72 },
+  Position   = { LAYOUT.Margin + 4, LAYOUT.Margin + 105 },
   Size       = { LAYOUT.W - LAYOUT.Margin * 2 - 8, 16 },
   Color      = STYLE.FgDim,
   FontSize   = 9,
@@ -68,13 +69,13 @@ table.insert(graphics, {
 -- Separator line
 table.insert(graphics, {
   Type        = "GroupBox",
-  Position    = { LAYOUT.Margin + 4, LAYOUT.Margin + 92 },
+  Position    = { LAYOUT.Margin + 4, LAYOUT.Margin + 120 },
   Size        = { LAYOUT.W - LAYOUT.Margin * 2 - 8, 1 },
   Fill        = STYLE.Stroke,
   StrokeWidth = 0
 })
 
-local dy = LAYOUT.Margin + 106
+local dy = LAYOUT.Margin + 150
 
 -- Row 1 — Last TX
 table.insert(graphics, {

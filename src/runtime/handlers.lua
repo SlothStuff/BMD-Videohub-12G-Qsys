@@ -6,7 +6,7 @@ DebugTx = false
 DebugRx = false
 
 -- Updates both the Status indicator and the small abbreviated text control
-local STATUS_SHORT = { [0]="OK", [1]="C", [2]="F", [5]="" }
+local STATUS_SHORT = { [0]="OK", [1]="C", [2]="F", [5]="--" }
 local function SetConnectionStatus(val)
   Controls.ConnectionStatus.Value = val
   local short = Controls["ConnStatusShort"]

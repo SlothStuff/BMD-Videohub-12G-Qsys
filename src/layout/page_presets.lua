@@ -13,7 +13,7 @@ layout["ConnStatusShort"] = {
   PrettyName  = "Status~Connection",
   Style       = "Text",
   IsReadOnly  = true,
-  Position    = { LAYOUT.W - LAYOUT.Margin - 26, LAYOUT.Margin + 15 },
+  Position    = { LAYOUT.W - LAYOUT.Margin - 26, LAYOUT.Margin + 20 },
   Size        = { 22, 20 },
   Color       = STYLE.BgSection,
   TextColor   = STYLE.FgLabel,
@@ -26,12 +26,13 @@ layout["ModelMismatch"] = {
   PrettyName  = "Status~Model Mismatch",
   Style       = "Text",
   IsReadOnly  = true,
-  Position    = { LAYOUT.Margin + 4, LAYOUT.Margin + 15 },
+  Position    = { LAYOUT.Margin + 4, LAYOUT.Margin + 20 },
   Size        = { LAYOUT.W - LAYOUT.Margin * 2 - 36, 20 },
   Color       = { 255, 255, 255, 0 },
   TextColor   = STYLE.Warning,
   FontSize    = 9,
   IsBold      = true,
+  StrokeWidth = 0,
   HTextAlign  = "Center"
 }
 

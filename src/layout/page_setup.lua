@@ -24,7 +24,7 @@ layout["ConnectionStatus"] = {
   PrettyName = "Status~Connection Status",
   Style      = "Text",
   IsReadOnly = true,
-  Position   = { LAYOUT.W - LAYOUT.Margin - LAYOUT.FieldW, LAYOUT.Margin + 15 },
+  Position   = { LAYOUT.W - LAYOUT.Margin - LAYOUT.FieldW, LAYOUT.Margin + 20 },
   Size       = { LAYOUT.FieldW, LAYOUT.ControlH }
 }
 
@@ -33,12 +33,13 @@ layout["ModelMismatch"] = {
   PrettyName  = "Status~Model Mismatch",
   Style       = "Text",
   IsReadOnly  = true,
-  Position    = { LAYOUT.Margin + 4, LAYOUT.Margin + 15 },
+  Position    = { LAYOUT.Margin + 4, LAYOUT.Margin + 20 },
   Size        = { LAYOUT.W - LAYOUT.Margin * 2 - LAYOUT.FieldW - 12, 20 },
   Color       = { 255, 255, 255, 0 },
   TextColor   = STYLE.Warning,
   FontSize    = 9,
   IsBold      = true,
+  StrokeWidth = 0,
   HTextAlign  = "Center"
 }
 

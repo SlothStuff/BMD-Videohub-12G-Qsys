@@ -26,7 +26,7 @@ layout["ConnStatusShort"] = {
   PrettyName  = "Status~Connection",
   Style       = "Text",
   IsReadOnly  = true,
-  Position    = { LAYOUT.W - LAYOUT.Margin - 26, LAYOUT.Margin + 15 },
+  Position    = { LAYOUT.W - LAYOUT.Margin - 26, LAYOUT.Margin + 20 },
   Size        = { 22, 20 },
   Color       = STYLE.BgSection,
   TextColor   = STYLE.FgLabel,
@@ -40,12 +40,13 @@ layout["ModelMismatch"] = {
   PrettyName  = "Status~Model Mismatch",
   Style       = "Text",
   IsReadOnly  = true,
-  Position    = { LAYOUT.Margin + 4, LAYOUT.Margin + 15 },
+  Position    = { LAYOUT.Margin + 4, LAYOUT.Margin + 20 },
   Size        = { LAYOUT.W - LAYOUT.Margin * 2 - 36, 20 },
   Color       = { 255, 255, 255, 0 },
   TextColor   = STYLE.Warning,
   FontSize    = 9,
   IsBold      = true,
+  StrokeWidth = 0,
   HTextAlign  = "Center"
 }
 
@@ -57,7 +58,7 @@ if isMultiBank then
   table.insert(graphics, {
     Type         = "Label",
     Text         = titleText,
-    Position     = { math.floor((LAYOUT.W - titleW) / 2), LAYOUT.Margin + 15 },
+    Position     = { math.floor((LAYOUT.W - titleW) / 2), LAYOUT.Margin + 55 },
     Size         = { titleW, 20 },
     Color        = STYLE.FgTitle,
     FontSize     = 10,
@@ -69,7 +70,7 @@ end
 -- ─────────────────────────────────────────────
 -- Column header row
 -- ─────────────────────────────────────────────
-local yColHeader = LAYOUT.HeaderH + 4
+local yColHeader = LAYOUT.HeaderH + 34
 
 -- Select column geometry based on lock mode
 local colNum, colNumW, colOut, colOutW, colIn, colInW, colName, colNameW
@@ -129,7 +130,7 @@ end
 -- ─────────────────────────────────────────────
 -- Routing rows
 -- ─────────────────────────────────────────────
-local yRowBase = LAYOUT.HeaderH + 4 + LAYOUT.RowH + 4
+local yRowBase = LAYOUT.HeaderH + 4 + LAYOUT.RowH + 34
 
 for i = bankStart, bankEnd do
   local rowIndex = i - bankStart
@@ -224,7 +225,7 @@ end
 -- ─────────────────────────────────────────────
 if useTake then
   local rowCount = bankEnd - bankStart + 1
-  local yTake    = yRowBase + rowCount * LAYOUT.RowSpacing + 4
+  local yTake    = yRowBase + rowCount * LAYOUT.RowSpacing + 34
 
   local takeBtnW = 80
   local takeBtnH = LAYOUT.TakeRowH - 6
