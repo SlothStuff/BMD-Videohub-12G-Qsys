@@ -15,10 +15,11 @@ layout["ConnStatusShort"] = {
   IsReadOnly  = true,
   Position    = { LAYOUT.W - LAYOUT.Margin - 26, LAYOUT.Margin + 20 },
   Size        = { 22, 20 },
-  Color       = STYLE.BgSection,
+  Color       = STYLE.StatusOff,
   TextColor   = STYLE.FgLabel,
   FontSize    = 8,
   IsBold      = true,
+  StrokeWidth = 0,
   HTextAlign  = "Center"
 }
 

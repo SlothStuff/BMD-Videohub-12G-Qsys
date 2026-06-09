@@ -6,11 +6,15 @@ DebugTx = false
 DebugRx = false
 
 -- Updates both the Status indicator and the small abbreviated text control
-local STATUS_SHORT = { [0]="OK", [1]="C", [2]="F", [5]="--" }
+local STATUS_SHORT = { [0]="OK", [1]="C",             [2]="F",            [5]="--" }
+local STATUS_COLOR = { [0]=STYLE.StatusOk, [1]=STYLE.StatusWarn, [2]=STYLE.StatusFault, [5]=STYLE.StatusOff }
 local function SetConnectionStatus(val)
   Controls.ConnectionStatus.Value = val
   local short = Controls["ConnStatusShort"]
-  if short then short.String = STATUS_SHORT[val] or "" end
+  if short then
+    short.String = STATUS_SHORT[val] or "--"
+    short.Color  = STATUS_COLOR[val] or STYLE.StatusOff
+  end
 end
 
 local function ClearMismatch()
