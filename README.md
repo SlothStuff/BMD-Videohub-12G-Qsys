@@ -1,6 +1,6 @@
 # Videohub 12G Q-SYS Plugin
 
-**Version:** 0.1.0
+**Version:** 1.3
 **Author:** Sweetwater Integration
 **Minimum Q-SYS Version:** 10.0
 
