@@ -1,0 +1,20 @@
+# Encrypted plugin output (binary, large)
+*.qplugx
+
+# Compiled output — rebuild with compile.ps1
+dist/
+
+# Encryption tool (cloned separately via setup-encryption-tool.ps1)
+tools/PluginEncryptionTool/
+
+# Local Claude Code settings (permissions, env vars)
+.claude/
+
+# Reference plugin binaries (not source)
+ReferenceDocs/Sweetwater-Blackmagic-Videohub-Router.qplug
+ReferenceDocs/Sweetwater-Blackmagic-Videohub-Router.zip
+
+# Editor / OS
+.vscode/
+*.DS_Store
+Thumbs.db
